@@ -15,7 +15,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        get("/hello", (req, res) -> "Hello World!");
 
         Todo todoItem = new Todo();
         todoItem.setId(UUID.randomUUID());
@@ -23,21 +22,26 @@ public class Main {
         todoItem.setSummary("Summary");
         items.add(todoItem);
 
-        String jsonTodo = new Gson().toJson(todoItem);
+        get("/allTodos", (req, res) ->  items);
 
-        get("/todo", (req, res) -> jsonTodo);
+        get("/:id", (request, response) -> {
+            for (Todo item : items) {
+                if (item.getId().equals(UUID.fromString(request.params(":id")))) {
+                    return item.toJson();
+                }
+            }
+            return "Could not find item.";
+        });
 
-        post("/", (req, res) -> {
-            Todo item = fromJson(req.body());
+        post("/", (request, response) -> {
+            Todo item = fromJson(request.body());
             item.setId(UUID.randomUUID());
             items.add(item);
-            return new Gson().toJson(item);
+            return item.toJson();
         });
 
         put("/", (request, response) -> {
             Todo updatedItem = new Gson().fromJson(request.body(), Todo.class);
-            System.out.println(request.body());
-            System.out.println(items);
             for (int i = 0; i < items.size(); i++) {
                 if (items.get(i).getId().equals(updatedItem.getId())) {
                     items.set(i, updatedItem);
@@ -47,9 +51,9 @@ public class Main {
             return "Could not update";
         });
 
-        delete("/", (request, response) -> {
-            return request.body();
-        });
+        delete("/:id", (request, response) ->
+           items.removeIf(item -> item.getId().equals(UUID.fromString(request.params(":id"))))
+        );
 
 
     }
