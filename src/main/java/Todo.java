@@ -1,5 +1,5 @@
 
-public class todo {
+public class Todo {
 
     private String summary;
     private String description;
@@ -18,5 +18,13 @@ public class todo {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Todo{" +
+                "summary='" + summary + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
