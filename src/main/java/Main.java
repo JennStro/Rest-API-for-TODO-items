@@ -5,8 +5,8 @@ import static spark.Spark.*;
 
 public class Main {
 
-    private static TodoRepository repository = new TodoRepository();
-    private static TodoService service = new TodoService(repository);
+    private static final TodoRepository repository = new TodoRepository();
+    private static final TodoService service = new TodoService(repository);
 
     public static Todo fromJson(String json) {
         return new Gson().fromJson(json, Todo.class);
