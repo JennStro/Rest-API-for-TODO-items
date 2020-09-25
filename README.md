@@ -4,7 +4,7 @@ ___
 #### How to use    
 Run the application by running Main. Use Postman to interact with the application.   
 
-To **post** a new TODO item provide a JSON object like `{ "summary": "Some summary", "description": a description}` 
+To **post** a new TODO item provide a JSON object like `{ "summary": "Some summary", "description": "a description"}` 
 and post it to `localhost:4567/`.    
 
 To **put** a TODO item already in the app provide a JSON object with a matching UUID to the item you are updating
