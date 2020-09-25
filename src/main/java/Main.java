@@ -31,8 +31,9 @@ public class Main {
 
         get("/:id", (request, response) -> {
             UUID id = UUID.fromString(request.params(":id"));
-            if (!(service.getTodoById(id) == null)) {
-                return service.getTodoById(id).toJson();
+            Todo todo = service.getTodoById(id);
+            if (todo != null) {
+                return todo.toJson();
             }
             return "Could not find item.";
         });
@@ -40,20 +41,22 @@ public class Main {
         post("/", (request, response) -> service.save(fromJson(request.body())).toJson());
 
         put("/", (request, response) -> {
-            Todo updatedItem = fromJson(request.body());
-            if (service.update(updatedItem) != null) {
-                return service.update(updatedItem);
+            Todo newItem = fromJson(request.body());
+            Todo updatedItem = service.update(newItem);
+            if (updatedItem != null) {
+                return updatedItem.toJson();
             }
             return "Could not update";
         });
 
         delete("/:id", (request, response) -> {
             UUID id = UUID.fromString(request.params(":id"));
-            Optional maybeTodo = service.deleteTodoById(id);
-            if (service.deleteTodoById(id) != null) {
-
+            Todo maybeTodo = service.deleteTodoById(id);
+            if (maybeTodo != null) {
+                return maybeTodo.toJson();
             }
-                };
+            return "Could not delete";
+        }
         );
 
 
