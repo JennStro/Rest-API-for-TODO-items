@@ -15,3 +15,26 @@ To **get** a specific TODO item give the UUID in the path: `localhost:4567/1234-
 To **get** all the TODOs query `localhost:4567/allTodos`.   
 
 To **delete** a TODO give the UUID in the path `localhost:4567/1234-1234-1234-1234` where 1234-1234-1234-1234 is the UUID.         
+
+
+
+
+#### Example   
+
+Insert a new item   
+![POST](Screenshots/POST.png?raw=true)   
+
+Get the item   
+![GET](Screenshots/Get.png?raw=true)   
+
+Update a item   
+![PUT](Screenshots/Update.png?raw=true)   
+
+Get all todos   
+![GET](Screenshots/AllTodosBeforeDel.png?raw=true)   
+
+Delete a todo   
+![DELETE](Screenshots/Delete.png?raw=true)   
+
+Get all todos after deleting   
+![GET](Screenshots/TodosAfterDel.png?raw=true)   
