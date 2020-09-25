@@ -12,7 +12,7 @@ public class Main {
     private static List<Todo> items = new ArrayList<>();
 
     private static TodoRepository repository = new TodoRepository();
-    private static TodoService service = new TodoService();
+    private static TodoService service = new TodoService(repository);
 
 
     public static Todo fromJson(String json) {

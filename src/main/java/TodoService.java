@@ -1,10 +1,13 @@
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public class TodoService {
 
-    private final TodoRepository repository = new TodoRepository();
+    private final TodoRepository repository;
+
+    public TodoService(TodoRepository repository) {
+        this.repository = repository;
+    }
 
     public List<Todo> getAllTodos() {
         return repository.getAllTodos();
